@@ -1,14 +1,18 @@
 <h2>Product List (with Query Parameters)</h2>
 <div>
-    <button>Electronics</button>
-    <button>Books</button>
-    <button>Furniture</button>
-    <button>Clear Filter</button>
+    <button (click)="filterByCategory('electronics')">Electronics</button>
+    <button (click)="filterByCategory('books')">Books</button>
+    <button (click)="filterByCategory('furniture')">Furniture</button>
+    <button (click)="filterByCategory(null)">Clear Filter</button>
 </div>
-<p>Current Category Filter: </p>
-
+<p>Current Category Filter: {{ category() || 'None' }}</p>
+@for (product of products(); track product.id) {
+@if (!category() || product.category === category()) {
 <div>
-    <a></a>
+    <a [routerLink]="['/product', product.id]">{{ product.name }} ({{ product.category }}) - ${{ product.price }}</a>
 </div>
-
+}
+} @empty {
+<p>No products found.</p>
+}
 <a routerLink="/paged">Go to Paged List</a>

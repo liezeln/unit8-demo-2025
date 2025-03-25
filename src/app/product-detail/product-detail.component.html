@@ -1,1 +1,9 @@
-<p>product-detail works!</p>
+@if (product) {
+    <h2>{{ product.name }}</h2>
+    <p>Category: {{ product.category }}</p>
+    <p>Price: ${{ product.price }}</p>
+    <a routerLink="/">Back to List</a>
+} @else {
+    <p>Product not found.</p>
+    <a routerLink="/">Back to List</a>
+}
